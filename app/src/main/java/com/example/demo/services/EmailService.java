@@ -16,18 +16,30 @@ public class EmailService {
     private String fromEmail;
 
     public void sendOrderConfirmation(String to, Long orderId, String status) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        System.out.println("=== INICIANDO ENVIO DE EMAIL ===");
+        System.out.println("From: " + fromEmail);
+        System.out.println("To: " + to);
+        System.out.println("Order ID: " + orderId);
         
-        message.setFrom(fromEmail);
-        message.setTo(to);
-        message.setSubject("Confirmacion de Orden #" + orderId + " - GymWear");
-        message.setText("Hola,\n\n" +
-                "Tu orden con ID " + orderId + " ha sido procesada exitosamente.\n" +
-                "Estado actual: " + status + "\n\n" +
-                "Gracias por tu compra.\n" +
-                "Atte: El equipo de GymWear.");
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(to);
+            message.setSubject("Confirmacion de Orden #" + orderId + " - GymWear");
+            message.setText("Hola,\n\n" +
+                    "Tu orden con ID " + orderId + " ha sido procesada exitosamente.\n" +
+                    "Estado actual: " + status + "\n\n" +
+                    "Gracias por tu compra.\n" +
+                    "Atte: El equipo de GymWear.");
 
-        mailSender.send(message);
-        System.out.println("Correo enviado exitosamente a: " + to);
+            System.out.println("Enviando email...");
+            mailSender.send(message);
+            System.out.println("=== EMAIL ENVIADO EXITOSAMENTE ===");
+        } catch (Exception e) {
+            System.out.println("=== ERROR AL ENVIAR EMAIL ===");
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
