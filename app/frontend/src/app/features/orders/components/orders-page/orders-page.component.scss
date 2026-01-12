@@ -1,0 +1,7 @@
+.form-card { margin-bottom: 12px; }
+.form { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 12px; align-items: start; }
+.items { grid-column: 1 / -1; }
+.item { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)) auto; gap: 12px; align-items: center; margin-bottom: 8px; }
+.actions { grid-column: 1 / -1; }
+.center { display: flex; justify-content: center; padding: 16px; }
+table { width: 100%; }

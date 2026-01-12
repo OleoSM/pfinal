@@ -1,0 +1,153 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-card {
+  margin-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.divider {
+  margin: 24px 0;
+}
+
+.items-section {
+  margin-top: 16px;
+}
+
+.items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.items-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.empty-items {
+  text-align: center;
+  padding: 32px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  color: var(--gray-500);
+}
+
+.empty-items mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.empty-items p {
+  margin: 0;
+}
+
+.item-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.product-field {
+  flex: 3;
+}
+
+.qty-field {
+  flex: 1;
+  min-width: 100px;
+}
+
+.price-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.order-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.total-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.order-id {
+  display: inline-block;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.items-count {
+  color: var(--gray-600);
+  font-size: 13px;
+}
+
+.price-tag {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.empty-state h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: var(--gray-700);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.form-actions button mat-icon {
+  margin-right: 8px;
+}

@@ -1,0 +1,134 @@
+<div class="dashboard">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-subtitle">Bienvenido al panel de administración de GymWear</p>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <a routerLink="/categories" class="stat-card">
+        <div class="icon purple">
+          <mat-icon>category</mat-icon>
+        </div>
+        <div class="value">{{ stats.categories }}</div>
+        <div class="label">Categorías</div>
+      </a>
+
+      <a routerLink="/products" class="stat-card">
+        <div class="icon blue">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <div class="value">{{ stats.products }}</div>
+        <div class="label">Productos</div>
+      </a>
+
+      <a routerLink="/users" class="stat-card">
+        <div class="icon green">
+          <mat-icon>people</mat-icon>
+        </div>
+        <div class="value">{{ stats.users }}</div>
+        <div class="label">Usuarios</div>
+      </a>
+
+      <a routerLink="/orders" class="stat-card">
+        <div class="icon orange">
+          <mat-icon>receipt_long</mat-icon>
+        </div>
+        <div class="value">{{ stats.orders }}</div>
+        <div class="label">Órdenes</div>
+      </a>
+
+      <div class="stat-card">
+        <div class="icon pink">
+          <mat-icon>payments</mat-icon>
+        </div>
+        <div class="value">${{ stats.totalRevenue | number:'1.2-2' }}</div>
+        <div class="label">Ingresos Totales</div>
+      </div>
+    </div>
+
+    <!-- Recent Data -->
+    <div class="recent-grid">
+      <!-- Recent Products -->
+      <div class="data-card">
+        <div class="data-card-header">
+          <h3 class="data-card-title">Productos Recientes</h3>
+          <a mat-button color="primary" routerLink="/products">Ver todos</a>
+        </div>
+        <div class="data-card-content">
+          <div *ngIf="recentProducts.length === 0" class="empty-state">
+            <mat-icon>inventory_2</mat-icon>
+            <p>No hay productos aún</p>
+          </div>
+          <div class="recent-list">
+            <div *ngFor="let product of recentProducts" class="recent-item">
+              <div class="recent-item-icon blue">
+                <mat-icon>shopping_bag</mat-icon>
+              </div>
+              <div class="recent-item-info">
+                <div class="recent-item-title">{{ product.name }}</div>
+                <div class="recent-item-subtitle">{{ product.category?.name || 'Sin categoría' }}</div>
+              </div>
+              <div class="recent-item-value">${{ product.basePrice | number:'1.2-2' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="data-card">
+        <div class="data-card-header">
+          <h3 class="data-card-title">Órdenes Recientes</h3>
+          <a mat-button color="primary" routerLink="/orders">Ver todas</a>
+        </div>
+        <div class="data-card-content">
+          <div *ngIf="recentOrders.length === 0" class="empty-state">
+            <mat-icon>receipt_long</mat-icon>
+            <p>No hay órdenes aún</p>
+          </div>
+          <div class="recent-list">
+            <div *ngFor="let order of recentOrders" class="recent-item">
+              <div class="recent-item-icon orange">
+                <mat-icon>receipt</mat-icon>
+              </div>
+              <div class="recent-item-info">
+                <div class="recent-item-title">Orden #{{ order.id }}</div>
+                <div class="recent-item-subtitle">
+                  <span class="badge" [ngClass]="{
+                    'success': order.status === 'completed',
+                    'warning': order.status === 'pending',
+                    'info': order.status === 'processing'
+                  }">{{ order.status }}</span>
+                </div>
+              </div>
+              <div class="recent-item-value">${{ order.grandTotal | number:'1.2-2' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Info -->
+    <div class="api-info">
+      <div class="api-card">
+        <mat-icon>api</mat-icon>
+        <div class="api-details">
+          <h4>API Endpoints Disponibles</h4>
+          <div class="api-list">
+            <code>GET /api/categories</code>
+            <code>GET /api/products</code>
+            <code>GET /api/users</code>
+            <code>GET /api/orders</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,64 @@
+<mat-sidenav-container class="app-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <div class="sidenav-header">
+      <div class="logo">
+        <mat-icon>fitness_center</mat-icon>
+        <span>GymWear</span>
+      </div>
+    </div>
+    
+    <nav class="sidenav-nav">
+      <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/categories" routerLinkActive="active" class="nav-item">
+        <mat-icon>category</mat-icon>
+        <span>Categorias</span>
+      </a>
+      <a mat-list-item routerLink="/products" routerLinkActive="active" class="nav-item">
+        <mat-icon>inventory_2</mat-icon>
+        <span>Productos</span>
+      </a>
+      <a mat-list-item routerLink="/users" routerLinkActive="active" class="nav-item">
+        <mat-icon>people</mat-icon>
+        <span>Usuarios</span>
+      </a>
+      <a mat-list-item routerLink="/orders" routerLinkActive="active" class="nav-item">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Ordenes</span>
+      </a>
+    </nav>
+
+    <div class="sidenav-footer">
+      <div class="api-badge">
+        <mat-icon>api</mat-icon>
+        <span>API: localhost:8080</span>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="greeting">Panel de Administracion</span>
+      </div>
+      <div class="topbar-actions">
+        <span class="status-badge online">
+          <span class="status-dot"></span>
+          Backend Conectado
+        </span>
+        
+        <div class="user-info">
+          <div class="user-avatar-small">AD</div>
+          <span class="user-name">Administrador</span>
+          <span class="user-role">admin</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

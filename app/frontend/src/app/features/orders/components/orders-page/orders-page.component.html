@@ -1,0 +1,104 @@
+<h2>Órdenes</h2>
+
+<mat-card class="form-card">
+  <mat-card-title>Nueva orden</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>User ID</mat-label>
+        <input matInput type="number" formControlName="userId" />
+        <mat-error *ngIf="form.get('userId')?.hasError('required')">Requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="status" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Grand Total</mat-label>
+        <input matInput type="number" formControlName="grandTotal" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Shipping Address ID</mat-label>
+        <input matInput type="number" formControlName="shippingAddressId" />
+      </mat-form-field>
+
+      <div class="items" formArrayName="items">
+        <h3>Items</h3>
+        <div class="item" *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+          <mat-form-field appearance="outline">
+            <mat-label>productVariantId</mat-label>
+            <input matInput type="number" formControlName="productVariantId" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>quantity</mat-label>
+            <input matInput type="number" formControlName="quantity" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>unitPrice</mat-label>
+            <input matInput type="number" formControlName="unitPrice" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>lineTotal</mat-label>
+            <input matInput type="number" formControlName="lineTotal" />
+          </mat-form-field>
+
+          <button mat-button type="button" (click)="removeItem(i)" [disabled]="items.length <= 1">Quitar</button>
+        </div>
+
+        <button mat-stroked-button type="button" (click)="addItem()">+ Agregar item</button>
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="button" (click)="create()">Guardar</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Listado</mat-card-title>
+  <mat-card-content>
+    <div *ngIf="loading" class="center">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+
+    <table mat-table [dataSource]="orders" class="mat-elevation-z1" *ngIf="!loading">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef>User ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.userId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="grandTotal">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let row">{{ row.grandTotal }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button type="button" (click)="downloadPdf(row.id)">PDF</button>
+          <button mat-button type="button" (click)="sendEmail(row.id)">Email</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
