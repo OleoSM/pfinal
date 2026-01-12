@@ -11,9 +11,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // Permitir CORS para desarrollo (Angular en localhost:4200)
+        // Permitir CORS para desarrollo y produccion
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:4200", "http://localhost:8080")
+                .allowedOrigins(
+                    "http://localhost:4200", 
+                    "http://localhost:8080",
+                    "https://*.railway.app",
+                    "https://*.up.railway.app"
+                )
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
@@ -22,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Servir archivos estáticos del frontend desde /static/
+        // Servir archivos estaticos del frontend desde /static/
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .resourceChain(true);
@@ -36,5 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/products").setViewName("forward:/index.html");
         registry.addViewController("/users").setViewName("forward:/index.html");
         registry.addViewController("/orders").setViewName("forward:/index.html");
+        registry.addViewController("/login").setViewName("forward:/index.html");
     }
 }

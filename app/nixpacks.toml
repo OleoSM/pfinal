@@ -1,0 +1,16 @@
+[phases.setup]
+nixPkgs = ["nodejs_20", "jdk17", "maven"]
+
+[phases.install]
+cmds = ["cd frontend && npm ci"]
+
+[phases.build]
+cmds = [
+    "cd frontend && npm run build -- --configuration=production",
+    "mkdir -p src/main/resources/static",
+    "cp -r frontend/dist/tienda-front/browser/* src/main/resources/static/",
+    "./mvnw clean package -DskipTests -Dmaven.test.skip=true"
+]
+
+[start]
+cmd = "java -Dserver.port=$PORT -jar target/gymwear-shop-api-0.0.1-SNAPSHOT.jar"
